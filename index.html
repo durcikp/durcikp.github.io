@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Polona Durcik</title>
+<meta name="description" content="Polona Durcik, Assistant Professor of Mathematics, Chapman University.">
+
+<style>
+  :root {
+    --bg:        #ffffff;
+    --text:      #212121;
+    --muted:     #6b6b6b;
+    --accent:    #06417c;
+    --link:      #06417c;
+    --link-header: #212121;
+    --rule:      #d9d9d9;
+
+    --font: "Palatino Linotype", Palatino, "Book Antiqua", "URW Palladio L", "TeX Gyre Pagella", Georgia, serif;
+    --column: 900px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 17px;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  .page {
+    max-width: calc(var(--column) + 48px);
+    margin: 0 auto;
+    padding: 16px 24px 0;
+
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  a { color: var(--link); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
+  a:hover { text-decoration-thickness: 2px; }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 32px;
+    padding-bottom: 20px;
+  }
+  .header-text { min-width: 0; padding-top: 8px; }
+
+  .name {
+    margin: 0;
+    font-size: 44px;
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+    color: var(--accent);
+  }
+  .title {
+    margin: 6px 0 0;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--text);
+  }
+  .contact {
+    margin: 14px 0 0;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .contact + .contact { margin-top: 10px; }
+  .contact a { color: var(--link-header); }
+  .contact em { font-style: italic; }
+
+  .photo {
+    flex: 0 0 auto;
+    width: 230px;
+    height: 269px;
+    margin-top: 8px;
+    object-fit: cover;
+    display: block;
+    background: #eef1f5;
+  }
+
+  .nav {
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .nav li { text-align: center; }
+  .nav a {
+    position: relative;
+    display: inline-block;
+    padding: 12px 0 13px;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .nav a:hover { color: var(--text); }
+  .nav a[aria-current="page"] { color: var(--text); }
+  .nav a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 6px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--accent);
+  }
+  .nav a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .js body.subpage .header { display: none; }
+
+  .js body:not(.subpage) .nav li:first-child { display: none; }
+  .js body:not(.subpage) .nav ul { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 560px) {
+    .js body:not(.subpage) .nav ul { grid-template-columns: repeat(4, auto); }
+  }
+
+  .nav { display: flex; align-items: center; gap: 24px; }
+  .nav ul { flex: 1; }
+  .nav .nav-name {
+    display: none;
+    padding: 0;
+    line-height: 1.2;
+    color: var(--accent);
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .js body.subpage .nav .nav-name { display: block; }
+  @media (max-width: 600px) {
+    .nav { flex-wrap: wrap; gap: 0; }
+    .nav .nav-name { padding-top: 12px; }
+    .nav ul { flex-basis: 100%; }
+  }
+  .header { margin-top: 48px; }
+
+  .content { padding-top: 56px; flex: 1 0 auto; }
+
+  .js .section { display: none; }
+  .js .section.active { display: block; }
+
+  .section h2 {
+    margin: 0 0 18px;
+    font-size: 30px;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: var(--text);
+  }
+  .section h3 {
+    margin: 28px 0 12px;
+    font-size: 20px;
+    line-height: 1.3;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+  .section p { margin: 0 0 14px; }
+  .section ol, .section ul { margin: 0 0 14px; padding-left: 28px; }
+  .section li { margin-bottom: 14px; }
+  .section ol li::marker { color: var(--muted); font-size: 15px; font-weight: 400; }
+  .placeholder { color: var(--muted); font-style: italic; }
+
+  .footer {
+    margin-top: 56px;
+    padding: 18px 0 24px;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 4px 12px;
+    text-align: center;
+  }
+  .footer a { color: inherit; }
+  .claude-link { display: inline-flex; align-items: center; justify-content: center; width: 1.35em; height: 1.35em; }
+  .claude-link svg { display: block; width: 1.1em; height: 1.1em; }
+  .section h4 { margin: 18px 0 8px; font-size: 17px; line-height: 1.4; font-weight: 400; font-style: italic; color: var(--muted); }
+  .section h3 + h4 { margin-top: 0; }
+  .section ul.compact li { margin-bottom: 4px; }
+  .section ul.compact { margin-bottom: 18px; }
+  .section .note { color: var(--muted); font-style: italic; }
+  .section ol.pubs { padding-left: 36px; }
+
+  @media (max-width: 560px) {
+    .page { padding: 12px 20px 0; }
+    .header { gap: 16px; }
+    .name { font-size: 32px; }
+    .photo { width: 150px; height: 175px; margin-top: 4px; }
+    .nav ul { grid-template-columns: repeat(5, auto); justify-content: space-between; column-gap: 10px; }
+    .nav a { font-size: 15px; }
+  }
+  @media (max-width: 480px) {
+    .header { flex-direction: column-reverse; }
+    .photo { width: 180px; height: 210px; margin-top: 0; }
+  }
+  @media (max-width: 400px) {
+    .nav a { font-size: 14px; }
+    .nav ul { column-gap: 6px; }
+  }
+</style>
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<div class="page">
+  <nav class="nav" aria-label="Sections">
+    <span class="nav-name">Polona Durcik</span>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#teaching">Teaching</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#cv">CV</a></li>
+    </ul>
+  </nav>
+
+  <header class="header">
+    <div class="header-text">
+      <h1 class="name">Polona Durcik</h1>
+      <p class="title">Assistant Professor</p>
+
+      <p class="contact">
+        <a href="https://www.chapman.edu">Chapman University</a>, Mathematics<br>
+        <a href="https://www.chapman.edu/scst/index.aspx">Schmid College of Science and Technology</a><br>
+        One University Drive, Orange, CA 92866
+      </p>
+
+      <p class="contact">
+        <em>Office</em>: Keck 363<br>
+        <em>Phone</em>: 714 516 6133<br>
+        <em>E-mail</em>: durcik (at) chapman (dot) edu
+      </p>
+    </div>
+
+    <img class="photo" src="photo.jpg" alt="Polona Durcik"
+         onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 134 160%22%3E%3Crect width=%22134%22 height=%22160%22 fill=%22%23eef1f5%22/%3E%3Ccircle cx=%2267%22 cy=%2262%22 r=%2226%22 fill=%22%23c5ceda%22/%3E%3Cpath d=%22M22 160c4-34 22-52 45-52s41 18 45 52z%22 fill=%22%23c5ceda%22/%3E%3C/svg%3E';">
+  </header>
+
+  <main class="content">
+    <section class="section" data-section="research" aria-labelledby="h-research">
+      <h2 id="h-research">Research</h2>
+
+      <p><strong>Research interests:</strong> Harmonic analysis and its connections with ergodic theory and arithmetic combinatorics</p>
+
+      <h3>Publications and preprints</h3>
+
+      <ol class="pubs" reversed>
+        <li>(with M. Fraccaroli, J. Roos) A curved three-dimensional simplex Hilbert transform, submitted. <a href="https://arxiv.org/abs/2610.24850">2610.24850</a> (<a href="https://github.com/roos-j/lean-dfr">Lean</a>)</li>
+        <li>(with M. Fraccaroli, J. Roos) A weak Hellinger inequality for noisy Boolean channels, submitted. <a href="https://arxiv.org/abs/2609.28534">2609.28534</a> (<a href="https://github.com/roos-j/lean-weakhellinger">Lean</a>)</li>
+        <li>(with F. van Doorn, J. Roos, L. Slavíková, C. Thiele) A blueprint for the formalization of norm-variation of multiple ergodic averages for commuting transformations, <a href="https://arxiv.org/abs/2608.27321">2608.27321</a> (<a href="https://github.com/roos-j/lean-nct">Lean</a>)</li>
+        <li>(with L. Becker) The shifted bilinear Hilbert transform, submitted. <a href="https://arxiv.org/abs/2603.20173">2603.20173</a></li>
+        <li>(with P. Ivanisvili, J. Roos, X. Xie) Sharp isoperimetric inequalities on the Hamming cube II: The critical exponent, submitted. <a href="https://arxiv.org/abs/2602.20462">2602.20462</a></li>
+        <li>(with K. A. Škreb) Norm-variation of cubic ergodic averages, J. Math. Anal. Appl. 562 (2026), no. 2, Article 130689. <a href="https://arxiv.org/abs/1903.04370">1903.04370</a></li>
+        <li>(with L. Becker, F. Y-H. Lin) On trilinear singular Brascamp-Lieb integrals, J. London Math. Soc., 114 (2026), no. 4, e70729. <a href="https://arxiv.org/abs/2411.00141">2411.00141</a></li>
+        <li>(with P. Ivanisvili, J. Roos) Sharp isoperimetric inequalities on the Hamming cube near the critical exponent, To appear in Adv. Math. <a href="https://arxiv.org/abs/2407.12674">2407.12674</a></li>
+        <li>(with K. Domelevo, V. Fragkiadaki, O. Klein, D. Oliveira e Silva, L. Slavíková, B. Wróbel) Dimension-free inequalities for low and high degree functions on the Hamming cube, Studia Math. 280 (2025), 161-173. <a href="https://arxiv.org/abs/2401.07699">2401.07699</a></li>
+        <li>(with L. Slavíková, C. Thiele) Norm-variation of triple ergodic averages for commuting transformations, Analysis &amp; PDE 19 (2026), no. 3, 539-586. <a href="https://arxiv.org/abs/2307.07372">2307.07372</a></li>
+        <li>(with V. Kovač, M. Stipčić) A strong-type Furstenberg-Sárközy theorem for sets of positive measure, J. Geom. Anal. 33 (2023), issue 8, article no. 255, 16 pp. <a href="https://arxiv.org/abs/2302.13548">2302.13548</a></li>
+        <li>(with J. Roos) A new proof of an inequality of Bourgain, Math. Res. Lett. 31 (2024), no. 4, 1047-1060. <a href="https://arxiv.org/abs/2210.01326">2210.01326</a></li>
+        <li>(with M. Stipčić) Quantitative bounds for products of simplices in subsets of the unit cube, Isr. J. Math. 267 (2025), 135-156. <a href="https://arxiv.org/abs/2206.10004">2206.10004</a>.</li>
+        <li>(with L. Slavíková, C. Thiele) Local bounds for singular Brascamp-Lieb forms with cubical structure, Math. Z. 302 (2022), 2375-2405. <a href="https://arxiv.org/abs/2112.15101">2112.15101</a>.</li>
+        <li>(with R. Greenfeld, A. Iseli, A. Jamenshan, J. Madrid) An uncountable ergodic Roth theorem and applications, Discrete Contin. Dyn. Syst., 42(11) (2022), 5509-5540. <a href="https://arxiv.org/abs/2101.00685">2101.00685</a>.</li>
+        <li>(with M. Christ, V. Kovač, J. Roos) Pointwise convergence of certain continuous-time double ergodic averages, Ergodic Theory Dynam. Systems. 42 (2022), no. 7, 2270-2280. <a href="https://arxiv.org/abs/2011.06370">2011.06370</a>.</li>
+        <li>(with M. Christ, J. Roos) Trilinear smoothing inequalities and a variant of the triangular Hilbert transform, Adv. Math. 390 (2021), Paper No. 107863. <a href="https://arxiv.org/abs/2008.10140">2008.10140</a>.</li>
+        <li>(with F. Bernicot) Boundedness of some multi-parameter fiber-wise multiplier operators, Indiana Univ. Math. J. (2020). <a href="https://arxiv.org/abs/2007.02211">2007.02211</a>.</li>
+        <li>(with V. Kovač) A Szemerédi-type theorem for subsets of the unit cube, Analysis &amp; PDE. 15 (2022), no. 2, 507-549. <a href="https://arxiv.org/abs/2003.01189">2003.01189</a>.</li>
+        <li>(with L. Cladek, B. Krause, J. Madrid) Directional maximal function along the primes, Publ. Mat. 65 (2021), no. 2, 841–858. <a href="https://arxiv.org/abs/1909.13319">1909.13319</a>.</li>
+        <li>(with C. Thiele) Singular Brascamp-Lieb: a survey, Geometric Aspects of Harmonic Analysis, Vol. 45, Springer INdAM Series, Springer International Publishing, 2021. <a href="https://arxiv.org/abs/1904.08844">1904.08844</a>.</li>
+        <li>(with J. Roos) Averages of simplex Hilbert transforms, Proc. Amer. Math. Soc. 149 (2021), no. 2, 633-647. <a href="https://arxiv.org/abs/1812.11701">1812.11701</a>.</li>
+        <li>(with V. Kovač) Boxes, extended boxes, and sets of positive upper density in the Euclidean space, Math. Proc. Cambridge Philos. Soc., 171 (2021), no. 3, 481–501. <a href="https://arxiv.org/abs/1809.08692">1809.08692</a>.</li>
+        <li>(with C. Thiele) Singular Brascamp-Lieb inequalities with cubical structure, Bull. London Math. Soc. 52 (2020), no. 2, 283–298. <a href="https://arxiv.org/abs/1809.08688">1809.08688</a>.</li>
+        <li>(with S. Guo, J. Roos) A polynomial Roth theorem on the real line, Trans. Amer. Math. Soc. 371 (2019), no. 10, 6973-6993. <a href="http://arxiv.org/abs/1704.01546">1704.01546</a>.</li>
+        <li>(with V. Kovač, L. Rimanić) On side lengths of corners in positive density subsets of the Euclidean space, Int. Math. Res. Not. 2018, no. 22, 6844-6869. <a href="http://arxiv.org/abs/1609.09056">1609.09056</a>.</li>
+        <li>(with V. Kovač, C. Thiele) Power-type cancellation for the simplex Hilbert transform, J. Anal. Math. 139 (2019), 67–82. <a href="http://arxiv.org/abs/1608.00156">1608.00156</a>.</li>
+        <li>(with V. Kovač, K. A. Škreb, C. Thiele) Norm-variation of ergodic averages with respect to two commuting transformations, Ergodic Theory Dynam. Systems 39 (2019), no. 3, 658-688. <a href="http://arxiv.org/abs/1603.00631">1603.00631</a>.</li>
+        <li>L<sup>p</sup> estimates for a singular entangled quadrilinear form, Trans. Amer. Math. Soc. 369 (2017), no. 10, 6935-6951. <a href="http://arxiv.org/abs/1506.08150">1506.08150</a>.</li>
+        <li>An L<sup>4</sup> estimate for a singular entangled quadrilinear form, Math. Res. Lett. 22 (2015), no. 5, 1317-1332. <a href="http://arxiv.org/abs/1412.2384">1412.2384</a>.</li>
+      </ol>
+
+      <h3>Paper drafts obtained using AI</h3>
+      <p class="note">To be addressed</p>
+      <ul>
+        <li>Triangles in sets of positive upper density in the plane. <a href="https://hexagonmath.org/2611.00302v1">hexagon:2611.00302v1</a> (<a href="https://palomar-registry.org/entry.html?id=PALOMAR-2026-11-10-000004&amp;version=1">Lean</a>)</li>
+      </ul>
+
+    </section>
+
+    <section class="section" data-section="teaching" aria-labelledby="h-teaching">
+      <h2 id="h-teaching">Teaching</h2>
+
+      <h3>Current</h3>
+      <h4>Fall 2026</h4>
+      <ul class="compact">
+        <li>Math 100: Learning and studying Math for understanding</li>
+        <li>Math 210: Multivariable Calculus</li>
+      </ul>
+
+      <h3>Past</h3>
+      <h4>at Chapman</h4>
+      <ul class="compact">
+        <li>Spring 26: Math 451 (Complex Analysis)</li>
+        <li>Fall 25: Math 100</li>
+        <li>Spring 25: Math 100 (Learning and studying Math for understanding)</li>
+        <li>Spring 24: Math 440, CS 660 (Fourier Analysis)</li>
+        <li>Fall 23: Math 210 (Multivariable Calculus), 491</li>
+        <li>Spring 23: Math 110, Math 440</li>
+        <li>Spring 22: Math 110, Math 440 (Topology), 491 (Student-Faculty Research/Creative Activity)</li>
+        <li>Fall 21: Math 110, Math 450 (Real Analysis)</li>
+        <li>Spring 21: Math 111 (Single Variable Calculus II)</li>
+        <li>Fall 20: Math 110 (Single Variable Calculus I)</li>
+      </ul>
+
+      <h4>at Caltech</h4>
+      <ul class="compact">
+        <li>Spring 20: <a href="https://courses.caltech.edu/login/index.php">Ma110c</a></li>
+        <li>Winter 20: <a href="https://sites.google.com/site/math108winter2020/">Ma108b</a>, <a href="https://sites.google.com/site/math191section1winter2020/">Ma191b</a></li>
+        <li>Spring 19: <a href="https://sites.google.com/site/math110cspring2019/">Ma110c</a></li>
+        <li>Winter 19: <a href="https://sites.google.com/site/math6bwinter2019/">Ma6b</a>, <a href="https://sites.google.com/site/math108bwinter2019/">Ma108b</a></li>
+        <li>Spring 18: <a href="https://sites.google.com/site/math191csec3spring2018/">Ma191c</a></li>
+        <li>Winter 18: <a href="https://sites.google.com/site/math6bwinter2018/">Ma6b</a>, <a href="https://sites.google.com/site/math108bwinter2018/">Ma108b</a></li>
+      </ul>
+
+    </section>
+
+    <section class="section" data-section="events" aria-labelledby="h-events">
+      <h2 id="h-events">Events</h2>
+
+      <h3>Past events co-organized</h3>
+      <ul>
+        <li><a href="https://sites.google.com/view/readinggroupsinanalysis2025/home">Reading Groups in Analysis</a>, University of Pennsylvania, PA, August 4-8, 2025</li>
+        <li><a href="https://sites.google.com/view/paw-seminar">Probability and Analysis Webinar</a></li>
+        <li><a href="https://sites.google.com/chapman.edu/ags/">Analysis and Geometry seminar</a> at Chapman University</li>
+        <li>DTP <a href="https://www.mathematics.uni-bonn.de/him/programs/future/tp_2024_09">Boolean Analysis in Computer Science</a>, in Bonn, September 9 - December 18, 2024</li>
+        <li>Spring School <a href="https://sites.google.com/wisc.edu/mlha-2024/spring-school">Multilinear singular and oscillatory integrals and applications</a> in Madison, WI, May 19-23, 2024</li>
+        <li>Workshop <a href="https://aimath.org/workshops/upcoming/hypercubequantum/">Analysis on the hypercube with applications to quantum computing</a> in San Jose, June 6-10, 2022</li>
+        <li>Conference <a href="https://www.chapman.edu/scst/conferences-and-events/iwota-2021/index.aspx">IWOTA 2021</a>, Chapman University, August 9-13, 2021</li>
+        <li>Conference <a href="http://www.math.uni-bonn.de/veranstaltung/ywhapde2016/">Young Women in Harmonic Analysis and PDE</a>, December 2-4, 2016</li>
+      </ul>
+
+    </section>
+
+    <section class="section" data-section="cv" aria-labelledby="h-cv">
+      <h2 id="h-cv">CV</h2>
+
+      <p><a href="cv.pdf" target="_blank" rel="noopener">Link to CV</a></p>
+
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a class="claude-link" href="https://claude.ai" aria-label="Made with Claude" title="Made with Claude"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M14.2 12.3L22.4 13.5 M13.6 13.5L18.8 18.2 M12.9 14.0L16.6 21.8 M11.7 14.2L10.7 21.5 M10.5 13.6L5.2 19.6 M10.0 12.9L3.8 15.8 M9.8 11.7L1.5 10.5 M10.4 10.5L5.0 5.7 M11.1 10.0L7.6 2.6 M12.3 9.8L13.4 2.3 M13.5 10.4L18.7 4.6 M14.0 11.1L20.4 8.1" stroke="#D97757" stroke-width="2.3" stroke-linecap="round" fill="none"/></svg></a>
+    <span>Last update: November 12, 2026</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var DEFAULT = 'home';
+  var sections = document.querySelectorAll('.section');
+  var links = document.querySelectorAll('.nav li a');
+  var first = true;
+
+  function show() {
+    var key = (location.hash || '').slice(1).toLowerCase();
+    var found = false;
+    sections.forEach(function (s) { if (s.dataset.section === key) found = true; });
+    if (!found) key = DEFAULT;
+    document.body.classList.toggle('subpage', key !== DEFAULT);
+
+    sections.forEach(function (s) {
+      s.classList.toggle('active', s.dataset.section === key);
+    });
+    links.forEach(function (a) {
+      if (a.getAttribute('href') === '#' + key) a.setAttribute('aria-current', 'page');
+      else a.removeAttribute('aria-current');
+    });
+    var label = key === 'cv' ? 'CV' : key.charAt(0).toUpperCase() + key.slice(1);
+    document.title = key === DEFAULT ? 'Polona Durcik' : 'Polona Durcik · ' + label;
+    if (!first) window.scrollTo(0, 0);
+    first = false;
+  }
+
+  window.addEventListener('hashchange', show);
+  show();
+})();
+</script>
+</body>
+</html>
